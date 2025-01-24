@@ -1,0 +1,47 @@
+# Function to add two square matrices
+def add_matrices(matrix1, matrix2):
+    size = len(matrix1)  # Get the size of the matrix (number of rows/columns)
+    result = [[0 for _ in range(size)] for _ in range(size)]  # Initialize result matrix
+
+    for i in range(size):
+        for j in range(size):
+            result[i][j] = matrix1[i][j] + matrix2[i][j]
+
+    return result
+
+
+# Input function to get a square matrix from the user
+def input_matrix(size):
+    print(f"Enter the elements of a {size}x{size} matrix row by row:")
+    matrix = []
+    for i in range(size):
+        row = list(map(int, input(f"Enter row {i+1} elements (space-separated): ").split()))
+        if len(row) != size:
+            raise ValueError(f"Each row must have exactly {size} elements.")
+        matrix.append(row)
+    return matrix
+
+
+
+# Main program
+try:
+    n = int(input("Enter the size of the square matrices (n x n): "))
+    if n <= 0:
+        raise ValueError("Matrix size must be a positive integer.")
+
+    print("Matrix 1:")
+    matrix1 = input_matrix(n)
+
+    print("Matrix 2:")
+    matrix2 = input_matrix(n)
+
+    # Perform addition
+    result_matrix = add_matrices(matrix1, matrix2)
+
+    # Display the result
+    print("\nThe resulting matrix after addition is:")
+    for row in result_matrix:
+        print(" ".join(map(str, row)))
+
+except ValueError as e:
+    print(f"Error: {e}")
